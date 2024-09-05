@@ -1,157 +1,100 @@
 <template>
-  <v-container class="fill-height">
-    <v-responsive
-      class="align-centerfill-height mx-auto"
-      max-width="900"
-    >
-      <v-img
-        class="mb-4"
-        height="150"
-        src="@/assets/logo.png"
-      />
+  <v-container >
+    <v-card class="header-card" elevation="3">
+      <v-card-title class="text-center">
+        <h1>{{ siteTitle }}</h1>
+      </v-card-title>
+      <v-card-subtitle class="text-center">{{ subtitle }}</v-card-subtitle>
+    </v-card>
 
-      <div class="text-center">
-        <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>
+    <v-card class="mt-6" elevation="3">
+      <v-card-title class="text-center">
+        <h1>關於我</h1>
+      </v-card-title>
+      <v-card-text >
+        <p style="font-weight: 300; font-size: 20px; line-height: 1.6;">
+          {{ aboutText1 }}
+        </p>
+        <ul style="font-weight: 300; font-size: 16px; line-height: 1.6; color: rgb(211, 211, 157);">
+          <li v-for="lan in languageInSchool" :key="item">
+            {{lan}}
+          </li>
+          <br>
+          <li  v-for="lan in languageSelf" :key="item"> 
+            {{lan}}
+          </li>
+        </ul>
+      </v-card-text>
+    </v-card>
 
-        <h1 class="text-h2 font-weight-bold">Vuetify</h1>
-      </div>
-
-      <div class="py-4" />
-
-      <v-row>
-        <v-col cols="12">
-          <v-card
-            class="py-4"
-            color="surface-variant"
-            image="https://cdn.vuetifyjs.com/docs/images/one/create/feature.png"
-            prepend-icon="mdi-rocket-launch-outline"
-            rounded="lg"
-            variant="outlined"
+    <v-card class="mt-6" elevation="3">
+      <v-card-title class="text-center">
+        <h1>作品集</h1>
+      </v-card-title>
+      <v-card-text>
+        <v-row>
+          <v-col
+            v-for="(project, index) in projects"
+            :key="index"
+            cols="12"
+            md="4"
           >
-            <template #image>
-              <v-img position="top right" />
-            </template>
-
-            <template #title>
-              <h2 class="text-h5 font-weight-bold">Get started</h2>
-            </template>
-
-            <template #subtitle>
-              <div class="text-subtitle-1">
-                Replace this page by removing <v-kbd>{{ `<HelloWorld />` }}</v-kbd> in <v-kbd>pages/index.vue</v-kbd>.
-              </div>
-            </template>
-
-            <v-overlay
-              opacity=".12"
-              scrim="primary"
-              contained
-              model-value
-              persistent
-            />
-          </v-card>
-        </v-col>
-
-        <v-col cols="6">
-          <v-card
-            append-icon="mdi-open-in-new"
-            class="py-4"
-            color="surface-variant"
-            href="https://vuetifyjs.com/"
-            prepend-icon="mdi-text-box-outline"
-            rel="noopener noreferrer"
-            rounded="lg"
-            subtitle="Learn about all things Vuetify in our documentation."
-            target="_blank"
-            title="Documentation"
-            variant="text"
-          >
-            <v-overlay
-              opacity=".06"
-              scrim="primary"
-              contained
-              model-value
-              persistent
-            />
-          </v-card>
-        </v-col>
-
-        <v-col cols="6">
-          <v-card
-            append-icon="mdi-open-in-new"
-            class="py-4"
-            color="surface-variant"
-            href="https://vuetifyjs.com/introduction/why-vuetify/#feature-guides"
-            prepend-icon="mdi-star-circle-outline"
-            rel="noopener noreferrer"
-            rounded="lg"
-            subtitle="Explore available framework Features."
-            target="_blank"
-            title="Features"
-            variant="text"
-          >
-            <v-overlay
-              opacity=".06"
-              scrim="primary"
-              contained
-              model-value
-              persistent
-            />
-          </v-card>
-        </v-col>
-
-        <v-col cols="6">
-          <v-card
-            append-icon="mdi-open-in-new"
-            class="py-4"
-            color="surface-variant"
-            href="https://vuetifyjs.com/components/all"
-            prepend-icon="mdi-widgets-outline"
-            rel="noopener noreferrer"
-            rounded="lg"
-            subtitle="Discover components in the API Explorer."
-            target="_blank"
-            title="Components"
-            variant="text"
-          >
-            <v-overlay
-              opacity=".06"
-              scrim="primary"
-              contained
-              model-value
-              persistent
-            />
-          </v-card>
-        </v-col>
-
-        <v-col cols="6">
-          <v-card
-            append-icon="mdi-open-in-new"
-            class="py-4"
-            color="surface-variant"
-            href="https://discord.vuetifyjs.com"
-            prepend-icon="mdi-account-group-outline"
-            rel="noopener noreferrer"
-            rounded="lg"
-            subtitle="Connect with Vuetify developers."
-            target="_blank"
-            title="Community"
-            variant="text"
-          >
-            <v-overlay
-              opacity=".06"
-              scrim="primary"
-              contained
-              model-value
-              persistent
-            />
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-responsive>
+            <v-card>
+              <v-img :src="project.image" height="200px"></v-img>
+              <v-card-title>{{ project.title }}</v-card-title>
+              <v-card-subtitle>{{ project.description }}</v-card-subtitle>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
 
 <script setup lang="ts">
-  //
+import { ref } from 'vue';
+
+
+const siteTitle = ref('我的個人網站');
+const subtitle = ref('全端開發者 | 程式設計師');
+
+
+const aboutText1 = ref('你好，我是巫旼學，目前就讀長庚大學資工系大四，以下是我學習過的程式語言');
+const languageInSchool = ref(['大學中學習的','C/C++','Java','Python']);
+const languageSelf = ref(['自學的','React','Vue2/Vue3','js(前後端)']);
+
+
+
+const projects = ref([
+  { title: '專案 1', description: '描述 1', image: 'https://via.placeholder.com/400x200' },
+  { title: '專案 2', description: '描述 2', image: 'https://via.placeholder.com/400x200' },
+  { title: '專案 3', description: '描述 3', image: 'https://via.placeholder.com/400x200' }
+]);
+
+
+const contactForm = ref({
+  name: '',
+  email: '',
+  message: ''
+});
 </script>
+
+<style scoped>
+.header-card {
+  margin-bottom: 20px;
+  padding: 30px;
+}
+
+.fill-height {
+  min-height: 100vh;
+}
+
+.v-card {
+  margin-bottom: 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+</style>
+
