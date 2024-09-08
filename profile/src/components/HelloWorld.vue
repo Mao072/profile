@@ -11,21 +11,27 @@
       <v-card-title class="text-center">
         <h1>關於我</h1>
       </v-card-title>
-      <v-card-text >
+      <v-card-text>
         <p style="font-weight: 300; font-size: 20px; line-height: 1.6;">
           {{ aboutText1 }}
         </p>
         <ul style="font-weight: 300; font-size: 16px; line-height: 1.6; color: rgb(211, 211, 157);">
-          <li v-for="lan in languageInSchool" :key="item">
-            {{lan}}
+          <li v-for="lan in languageInSchool" :key="lan">
+            {{ lan }}
           </li>
           <br>
-          <li  v-for="lan in languageSelf" :key="item"> 
-            {{lan}}
+          <li v-for="lan in languageSelf" :key="lan"> 
+            {{ lan }}
           </li>
         </ul>
+        <br>
+        <a href="http://localhost:3000/introduce" style="color: rgb(159, 184, 231); text-decoration: underline;">
+          更多有關於我的自我介紹
+        </a>
+        
       </v-card-text>
     </v-card>
+    
 
     <v-card class="mt-6" elevation="3">
       <v-card-title class="text-center">
